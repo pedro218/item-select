@@ -1,21 +1,29 @@
 <template>
   <div class="home">
     <Navbar />
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <DisplayContainer v-if="user.name != null" :user="user" />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
+import { reactive } from 'vue'
 import Navbar from '@/components/Navbar'
-import HelloWorld from '@/components/HelloWorld'
+import DisplayContainer from '../components/images/DisplayContainer'
 
 export default {
   name: 'Home',
   components: {
     Navbar,
-    HelloWorld,
+    DisplayContainer,
+  },
+  setup() {
+    const user = reactive({
+      name: 'User 1',
+      path: './images/',
+      ammount: 13,
+    })
+
+    return { user }
   },
 }
 </script>
