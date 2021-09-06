@@ -2,29 +2,26 @@
   <w-flex wrap>
     <DisplayBox
       class="xs12 md6 lg4 xl2 pa1"
-      v-for="img in ammount"
+      v-for="img in user.ammount"
       :key="img"
-      :path="path"
+      :path="user.path"
       :number="img"
     />
   </w-flex>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { useStore } from 'vuex'
 import DisplayBox from './DisplayBox.vue'
 
 export default {
   name: 'DisplayContainer',
   components: { DisplayBox },
-  props: {
-    user: Object,
-  },
-  setup(props) {
-    const path = ref(props.user.path)
-    const ammount = ref(props.user.ammount)
+  setup() {
+    const store = useStore()
+    const user = store.getters.getUser
 
-    return { path, ammount }
+    return { user }
   },
 }
 </script>

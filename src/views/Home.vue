@@ -1,12 +1,12 @@
 <template>
   <div class="home">
     <Navbar />
-    <DisplayContainer v-if="user.name != null" :user="user" />
+    <DisplayContainer v-if="user?.name != null" />
   </div>
 </template>
 
 <script>
-import { reactive } from 'vue'
+import { useStore } from 'vuex'
 import Navbar from '@/components/Navbar'
 import DisplayContainer from '../components/images/DisplayContainer'
 
@@ -17,12 +17,8 @@ export default {
     DisplayContainer,
   },
   setup() {
-    const user = reactive({
-      name: 'User 1',
-      path: './images/',
-      ammount: 13,
-    })
-
+    const store = useStore()
+    const user = store.getters.getUser
     return { user }
   },
 }
