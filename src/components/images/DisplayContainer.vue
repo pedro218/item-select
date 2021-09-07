@@ -2,9 +2,9 @@
   <w-flex wrap>
     <DisplayBox
       class="xs12 md6 lg4 xl2 pa1"
-      v-for="img in user.ammount"
+      v-for="img in info.ammount"
       :key="img"
-      :path="user.path"
+      :path="info.path"
       :number="img"
     />
   </w-flex>
@@ -19,9 +19,8 @@ export default {
   components: { DisplayBox },
   setup() {
     const store = useStore()
-    const user = store.getters.getUser
-
-    return { user }
+    const info = store.getters.getinfo
+    return { info }
   },
 }
 </script>

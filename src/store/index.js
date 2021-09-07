@@ -1,18 +1,40 @@
 import { createStore } from 'vuex'
+import { login } from '../services/login'
 
 export default createStore({
   state: {
-    user: {
-      name: 'user 1',
-      ammount: 13,
-      path: './images/',
+    user: '',
+    info: {},
+  },
+  mutations: {
+    setState(state, response) {
+      state.user = response.name
+      state.info = response.info
+    },
+    clearUser(state) {
+      state.user = ''
+      state.info = {}
     },
   },
-  mutations: {},
-  actions: {},
+  actions: {
+    login({ commit }, { username, password }) {
+      const response = login(username, password)
+      if (response) {
+        commit('setState', response)
+        return true
+      }
+      return null
+    },
+    logout({ commit }) {
+      commit('clearUser')
+    },
+  },
   getters: {
     getUser(state) {
       return state.user
+    },
+    getinfo(state) {
+      return state.info
     },
   },
   modules: {},

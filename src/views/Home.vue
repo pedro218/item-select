@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <Navbar />
-    <DisplayContainer v-if="user?.name != null" />
+    <DisplayContainer v-if="user.length != null" />
   </div>
 </template>
 
