@@ -8,7 +8,7 @@
       :number="img"
       @update-count="updateCount"
     />
-    <CounterDisplay :overallCount="overallCount" />
+    <CounterDisplay :overallCount="overallCount" :available="available" />
   </w-flex>
 </template>
 

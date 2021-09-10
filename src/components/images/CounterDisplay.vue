@@ -13,8 +13,13 @@
         icon="wi-cross"
       />
       <div class="counter-text">
-        <div class="info-count" v-for="(value, key) in totalCount" :key="key">
-          <strong>{{ key }}: </strong>{{ value }}
+        <div
+          class="info-count"
+          v-for="(value, key) in totalCount"
+          :key="key"
+          :class="value > limit[key] ? 'over-limit' : ''"
+        >
+          <strong>{{ key }}: </strong>{{ value }}/{{ limit[key] }}
         </div>
       </div>
     </w-drawer>
@@ -27,11 +32,13 @@ export default {
   name: 'CounterDisplay',
   props: {
     overallCount: Object,
+    available: Object,
   },
   setup(props) {
     const totalCount = reactive(props.overallCount)
     const showDrawer = ref(false)
-    return { totalCount, showDrawer }
+    const limit = reactive(props.available)
+    return { totalCount, showDrawer, limit }
   },
 }
 </script>
@@ -70,6 +77,10 @@ h1 {
 
 .info-count {
   display: inline;
+}
+
+.over-limit {
+  color: red;
 }
 
 @media (max-width: 800px) {
